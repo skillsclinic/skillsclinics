@@ -16,18 +16,23 @@ class UserTuteeController extends Controller
     }
 
 
-    public function create()
+    public function create($id)
     {
         //
         $subjects = Subject::all();
+        $months = collect(['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']);
         return View::make('user.tutee.create')
-            ->with(compact('subjects'));
+            ->with(compact('subjects'))
+            ->with(compact('months'))
+            ->with(compact('id'));
     }
 
 
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        dd($data);
     }
 
 

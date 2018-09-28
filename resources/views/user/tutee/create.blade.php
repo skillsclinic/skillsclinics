@@ -9,7 +9,8 @@
                         Tutee Form
                     </div>
                     <div class="card-body">
-                        <form action="#">
+                        <form action="{{ route('users.tutee.store', ['id' => $id]) }}" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <label>Subject</label>
                                 <select name="subject_id" class="form-control">
@@ -26,12 +27,17 @@
                             </div>
                             <div class="form-group">
                                 <label>Month</label>
-                                <input type="text" class="form-control" name="month"/>
+                                <select name="month" class="form-control">
+                                    @foreach($months as $month)
+                                        <option value="{{$month}}">{{ ucfirst($month) }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>School Year</label>
                                 <input type="text" class="form-control" name="schoolYear"/>
                             </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                         </form>
                     </div>
                 </div>

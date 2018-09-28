@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         Tutee::truncate();
         Session::truncate();
 
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 123456, 'role' => User::ADMIN, 'password' => 'secret']);
+
 //        $usersQuantity = 200;
         $subjectsQuantity = 20;
 //        $tuteesQuantity = 50;
