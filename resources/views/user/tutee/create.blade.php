@@ -19,6 +19,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>Professor</label>
                                 <input type="text" class="form-control" name="professor"/>
