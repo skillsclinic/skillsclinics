@@ -33,6 +33,9 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+
 //TUTEE
 Route::resource('tutee', 'Tutee\TuteeController');
 
@@ -41,3 +44,9 @@ Route::resource('tutee', 'Tutee\TuteeController');
 //USER
 Route::resource('users', 'User\UserController');
 Route::resource('users.tutee', 'User\UserTuteeController')->except(['index']);
+Route::resource('users.tutee.session', 'User\UserTuteeSessionController')->except(['index']);
+
+
+
+//API ROUTES
+//Route::resource('api/user', 'Api\User\UserController')->only(['index']);

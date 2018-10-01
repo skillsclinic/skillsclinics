@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Subject;
 use App\Tutee;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +15,7 @@ class UserTuteeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin')->except(['show']);
     }
 
     public function index()
@@ -64,9 +66,19 @@ class UserTuteeController extends Controller
     }
 
 
-    public function show($id)
+    public function show(User $user, Tutee $tutee)
     {
         //
+        $profile = $user->profile()->first();
+        $subject = $tutee->subject()->first();
+        $sessions = $tutee->sessions()->with('mentor.profile')->get();
+
+        return View::make('user.tutee.show')
+            ->with(compact('tutee'))
+            ->with(compact('user'))
+            ->with(compact('profile'))
+            ->with(compact('subject'))
+            ->with(compact('sessions'));
     }
 
 

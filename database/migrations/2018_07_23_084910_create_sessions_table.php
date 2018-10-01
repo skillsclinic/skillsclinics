@@ -17,7 +17,6 @@ class CreateSessionsTable extends Migration
             $table->increments('id');
             $table->integer('tutee_id')->index()->unsigned();
             $table->integer('mentor_id')->index()->unsigned();
-            $table->integer('session_no');
             $table->date('date');
             $table->time('time_in');
             $table->time('time_out');

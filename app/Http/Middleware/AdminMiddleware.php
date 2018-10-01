@@ -26,6 +26,12 @@ class AdminMiddleware
         elseif (Auth::User()->role === User::STA){
             return $next($request);
         }
+        elseif (Auth::User()->role === User::STREAM){
+            return $next($request);
+        }
+        elseif (Auth::User()->role === User::JUNIOR_MENTOR){
+            return $next($request);
+        }
         return redirect(route('home'));
     }
 }

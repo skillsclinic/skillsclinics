@@ -17,30 +17,25 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin')->only('index');
+
         $this->middleware('login')->only('create');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
+
     public function index()
     {
         //
 
 
         $users = User::all();
+        $authenticatedUser = Auth::user();
 
         return View::make('user.index')
-            ->with(compact('users'));
+            ->with(compact('users'))
+            ->with(compact('authenticatedUser'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
+
     public function create()
     {
         //
@@ -52,12 +47,7 @@ class UserController extends Controller
             ->with(compact('male'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -96,54 +86,53 @@ class UserController extends Controller
         return redirect(route('home'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Contracts\View\View
-     */
+
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $student = Auth::user();
         $this->authorize('view', $user);
+        $admin = false;
+        if(Auth::user()->role === User::ADMIN || Auth::user()->role === User::SENIOR_MENTOR || Auth::user()->role === User::STA){
+            $admin = true;
+        }
 
-        $tutees = $user->tutees()->with('subject')->get();
+
+        $tutees = $user->tutees()->with('subject','sessions')->get();
+        $sessionCount = $tutees->pluck('sessions')->collapse();
+        $sessionCount = count($sessionCount);
+        $tuteeCount = count($tutees);
+//        $students = $student->role === User::STUDENT ? true:false;
+//        $sta = $student->role === User::STA ? true:false;
+//        $admin = $student->role === User::ADMIN ? true:false;
+//        $seniorMentor = $student->role === User::SENIOR_MENTOR ? true:false;
+//        $juniorMentor = $student->role === User::JUNIOR_MENTOR ? true:false;
+
+
         //$profile = Profile::where('user_id', '=', $id)->first();
 
         return View::make('user.show')
             ->with(compact('tutees'))
-            ->with(compact('user'));
+            ->with(compact('user'))
+            ->with(compact('id'))
+            ->with(compact('admin'))
+            ->with(compact('tuteeCount'))
+            ->with(compact('sessionCount'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
