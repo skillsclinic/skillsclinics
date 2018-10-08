@@ -35,6 +35,31 @@
         </div>
     </li>
 
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Items</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{{ route('items.index') }}">View Items</a>
+            <a class="dropdown-item" href="{{ route('inventories.index') }}">View Inventory</a>
+            <a class="dropdown-item" href="{{ route('items.create') }}">Create</a>
+        </div>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Stocks</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{{ route('stockins.index') }}">View All Stock In Transactions</a>
+            <a class="dropdown-item" href="{{ route('stockouts.index') }}">View All Stock Out Transactions</a>
+        </div>
+    </li>
+
 
     {{--<li class="nav-item">--}}
     {{--<a class="nav-link" href="tables.html">--}}

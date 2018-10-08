@@ -46,7 +46,20 @@ Route::resource('users', 'User\UserController');
 Route::resource('users.tutee', 'User\UserTuteeController')->except(['index']);
 Route::resource('users.tutee.session', 'User\UserTuteeSessionController')->except(['index']);
 
+//ITEMS
+Route::resource('items', 'Item\ItemController');
+Route::resource('items.inventory', 'Item\ItemInventoryController')->only(['store']);
 
+//INVENTORY
+Route::resource('inventories', 'Inventory\InventoryController');
+Route::resource('inventories.stockin', 'Inventory\InventoryStockInController')->only(['create','store']);
+Route::resource('inventories.stockout', 'Inventory\InventoryStockOutController')->only(['create','store']);
+
+//STOCK IN
+Route::resource('stockins', 'StockIn\StockInController');
+
+//STOCK OUT
+Route::resource('stockouts', 'StockOut\StockOutController');
 
 //API ROUTES
 //Route::resource('api/user', 'Api\User\UserController')->only(['index']);
