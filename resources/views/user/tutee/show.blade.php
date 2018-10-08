@@ -12,13 +12,14 @@
             line-height: 1.428571429;
             border-radius: 15px;
         }
+
         p {
             margin-bottom: 0px;
         }
 
-        .card-header-color{
-            background: #0f0c29;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+        .card-header-color {
+            background: #0f0c29; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29); /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to left, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
 
@@ -83,7 +84,9 @@
                                 <p class="font-weight-normal">Mentor</p>
                                 <p class="font-weight-normal">Remarks</p>
                             </td>
-                            <td>Actions</td>
+                            @if($admin)
+                                <td>Actions</td>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -98,15 +101,32 @@
                                 <td>{{$session->pre_test}}</td>
                                 <td>{{$session->post_test}}</td>
                                 <td>{{$session->remarks}}</td>
-                                <td><a href="{{ route('users.tutee.session.edit', ['user_id' => $user->id, 'tutee_id' => $tutee->id, 'session_id' => $session->id]) }}" class=" shadow-sm btn btn-info btn-circle"><i class="far fa-edit"></i></a><a href="#" class="btn btn-info btn-circle ml-1"><i class="far fa-trash-alt"></i></a></td>
+                                @if($admin)
+                                    <td>
+                                        <a href="{{ route('users.tutee.session.edit', ['user_id' => $user->id, 'tutee_id' => $tutee->id, 'session_id' => $session->id]) }}"
+                                           class=" shadow-sm btn btn-info btn-circle d-inline-block">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        {{--<a href="#" class="btn btn-info btn-circle ml-1">--}}
+                                            {{--<i class="far fa-trash-alt"></i>--}}
+                                        {{--</a>--}}
+                                        <form action="{{ route('users.tutee.session.destroy', ['user_id' => $user->id, 'tutee_id' => $tutee->id, 'session_id' => $session->id]) }}" class="d-inline-block" method="post">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <button class="btn btn-info btn-circle ml-1 "><i class="far fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-                <a class=" shadow-sm btn btn-primary float-right text-white"
-                   href="{{ route('users.tutee.session.create', ['user_id' => $user->id, 'tutee_id' => $tutee->id]) }}">New
-                    Session</a>
+                @if($admin)
+                    <a class=" shadow-sm btn btn-primary float-right text-white"
+                       href="{{ route('users.tutee.session.create', ['user_id' => $user->id, 'tutee_id' => $tutee->id]) }}">New
+                        Session</a>
+                @endif
             </div>
         </div>
     </div>

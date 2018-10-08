@@ -7,6 +7,7 @@ use App\Tutee;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -72,13 +73,15 @@ class UserTuteeController extends Controller
         $profile = $user->profile()->first();
         $subject = $tutee->subject()->first();
         $sessions = $tutee->sessions()->with('mentor.profile')->get();
+        $admin = (Auth::user()->role === User::ADMIN || Auth::user()->role === User::STA || Auth::user()->role === User::SENIOR_MENTOR || Auth::user()->role === User::JUNIOR_MENTOR || Auth::user()->role === User::STREAM ) ? true : false;
 
         return View::make('user.tutee.show')
             ->with(compact('tutee'))
             ->with(compact('user'))
             ->with(compact('profile'))
             ->with(compact('subject'))
-            ->with(compact('sessions'));
+            ->with(compact('sessions'))
+            ->with(compact('admin'));
     }
 
 

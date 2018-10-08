@@ -25,6 +25,7 @@ class CreateSessionsTable extends Migration
             $table->integer('post_test');
             $table->integer('remarks');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('tutee_id')->references('id')->on('tutees');
             $table->foreign('mentor_id')->references('id')->on('users');

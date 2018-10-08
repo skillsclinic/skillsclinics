@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\View;
 class UserTuteeSessionController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->except(['show']);
+    }
+
     public function index()
     {
         //
@@ -22,7 +28,9 @@ class UserTuteeSessionController extends Controller
     public function create(User $user, Tutee $tutee)
     {
         //
-        $mentors = User::with('profile')->whereIn('role',[User::JUNIOR_MENTOR,User::SENIOR_MENTOR,User::STREAM])->get();
+
+        ///$user = $user->where('status', '=', User::OLD)->get();
+        $mentors = User::with('profile')->whereIn('role', [User::JUNIOR_MENTOR, User::SENIOR_MENTOR, User::STREAM])->where('status','=', User::OLD)->get();
 
         return View::make('user.tutee.session.create')
             ->with(compact('user'))
@@ -45,7 +53,7 @@ class UserTuteeSessionController extends Controller
             'remarks' => 'required|min:1|max:1',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect(route('users.tutee.session.create', ['id' => $user->id, 'tutee_id' => $tutee->id]))
                 ->withErrors($validator)
                 ->withInput();
@@ -80,7 +88,7 @@ class UserTuteeSessionController extends Controller
 
     public function edit(User $user, Tutee $tutee, Session $session)
     {
-        $mentors = User::with('profile')->whereIn('role',[User::JUNIOR_MENTOR,User::SENIOR_MENTOR,User::STREAM])->get();
+        $mentors = User::with('profile')->whereIn('role', [User::JUNIOR_MENTOR, User::SENIOR_MENTOR, User::STREAM])->get();
 
 
         return View::make('user.tutee.session.edit')
@@ -106,7 +114,8 @@ class UserTuteeSessionController extends Controller
             'remarks' => 'required|min:1|max:1',
         ]);
 
-        if($validator->fails()){
+        
+        if ($validator->fails()) {
             return redirect(route('users.tutee.session.create', ['id' => $user->id, 'tutee_id' => $tutee->id]))
                 ->withErrors($validator)
                 ->withInput();
@@ -130,8 +139,10 @@ class UserTuteeSessionController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(User $user, Tutee $tutee, Session $session)
     {
-        //
+
+        $session->delete();
+        return redirect(route('users.tutee.show', ['user_id' => $user->id, 'tutee_ud' => $tutee->id]));
     }
 }

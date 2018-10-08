@@ -24,6 +24,17 @@ class DatabaseSeeder extends Seeder
         Session::truncate();
 
         DB::table('users')->insert(['status' => User::NEW, 'id_number' => 123456, 'role' => User::ADMIN, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 111111, 'role' => User::STA, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 888888, 'role' => User::STA, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 222222, 'role' => User::SENIOR_MENTOR, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 999999, 'role' => User::SENIOR_MENTOR, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 333333, 'role' => User::JUNIOR_MENTOR, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 121212, 'role' => User::JUNIOR_MENTOR, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 444444, 'role' => User::STREAM, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 131313, 'role' => User::STREAM, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 555555, 'role' => User::STUDENT, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 666666, 'role' => User::STUDENT, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
+        DB::table('users')->insert(['status' => User::NEW, 'id_number' => 777777, 'role' => User::STUDENT, 'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm']);
 
 //        $usersQuantity = 200;
         $subjectsQuantity = 20;

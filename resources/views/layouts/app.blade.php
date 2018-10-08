@@ -47,7 +47,6 @@
 {!! Html::script('js/app.js') !!}
 {!! Html::script('js/sb-admin.js') !!}
 {!! Html::script('js/mdtimepicker.js') !!}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @yield('scripts')
 </body>
 </html>

@@ -6,20 +6,32 @@ use App\Tutee;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class TuteeController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only(['index', 'show']);
+    }
+
     public function index()
     {
 
         $tutees = Tutee::with('student.profile','subject')->get();
-
+        $admin = false;
+        if(Auth::user()->role === User::ADMIN || Auth::user()->role === User::SENIOR_MENTOR || Auth::user()->role === User::STA){
+            $admin = true;
+        }
 
 
         return View::make('tutee.index')
-            ->with(compact('tutees'));
+            ->with(compact('tutees'))
+            ->with(compact('admin'));
     }
 
     /**

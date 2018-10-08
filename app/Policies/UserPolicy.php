@@ -14,15 +14,6 @@ class UserPolicy
         if ($user->role === User::ADMIN) {
             return true;
         }
-//        elseif ($user->role === User::STA) {
-//            return true;
-//        } elseif ($user->role === User::SENIOR_MENTOR) {
-//            return true;
-//        } elseif ($user->role === User::JUNIOR_MENTOR) {
-//            return true;
-//        }elseif ($user->role === User::STREAM) {
-//            return true;
-//        }
     }
 
     /**
@@ -36,24 +27,36 @@ class UserPolicy
     {
         //
         if($authenticatedUser->role === 'sta'){
+            if($user->role === 'sta' && $user->id != $authenticatedUser->id){
+                return false;
+            }
             if($user->role === 'admin'){
                 return false;
             }
             return true;
         }
         elseif($authenticatedUser->role === 'seniorMentor'){
+            if($user->role === 'seniorMentor' && $user->id != $authenticatedUser->id){
+                return false;
+            }
             if($user->role === 'admin' || $user->role === 'sta'){
                 return false;
             }
             return true;
         }
         elseif($authenticatedUser->role === 'juniorMentor'){
+            if($user->role === 'juniorMentor' && $user->id != $authenticatedUser->id){
+                return false;
+            }
             if($user->role === 'admin' || $user->role === 'sta' || $user->role === 'seniorMentor'){
                 return false;
             }
             return true;
         }
         elseif($authenticatedUser->role === 'stream'){
+            if($user->role === 'stream' && $user->id != $authenticatedUser->id){
+                return false;
+            }
             if($user->role === 'admin' || $user->role === 'sta' || $user->role === 'seniorMentor' || $user->role === 'juniorMentor'){
                 return false;
             }

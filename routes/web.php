@@ -26,25 +26,30 @@ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 $this->post('register', 'Auth\RegisterController@store');
 
 // Password Reset Routes...
-$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-$this->post('password/reset', 'Auth\ResetPasswordController@reset');
+//$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+//$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//$this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
-
 //TUTEE
-Route::resource('tutee', 'Tutee\TuteeController');
+Route::resource('tutee', 'Tutee\TuteeController')->only(['index', 'show']);
 
 
 
 //USER
-Route::resource('users', 'User\UserController');
+Route::resource('users', 'User\UserController')->except(['destroy']);
 Route::resource('users.tutee', 'User\UserTuteeController')->except(['index']);
 Route::resource('users.tutee.session', 'User\UserTuteeSessionController')->except(['index']);
+Route::get('/users/{user}/changepassword', 'User\UserController@changePassword')->name('users.changepassword');
+Route::post('/users/{user}/updatepassword', 'User\UserController@updatePassword')->name('users.updatepassword');
+
+
+//SUBJECT
+Route::resource('subject', 'Subject\SubjectController')->except(['show']);
+
 
 
 

@@ -87,9 +87,7 @@
                                 </tr>
                             @endif
                         @else
-
                         @endif
-
                     @endforeach
                     </tbody>
                     <tfoot>

@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Tutee::class, 'student_id');
     }
 
+    public function sessions()
+    {
+        return $this->hasMany(Session::class, 'mentor_id');
+    }
+
 }

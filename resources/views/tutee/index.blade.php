@@ -15,7 +15,6 @@
             </thead>
             <tbody>
             @foreach($tutees as $tutee)
-
                 <tr>
                     <td>{{$tutee->id}}</td>
                     <td>{{$tutee->subject->title}}</td>
